@@ -1,0 +1,15 @@
+{
+  "name": "NO SIGNAL — Альбом дня",
+  "short_name": "NO SIGNAL",
+  "description": "Независимый музыкальный журнал: один альбом, один выпуск, каждый день.",
+  "lang": "ru",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#efede6",
+  "theme_color": "#171715",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
