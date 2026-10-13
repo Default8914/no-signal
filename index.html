@@ -114,7 +114,13 @@ body{background:var(--paper);color:var(--ink);background-image:radial-gradient(e
     .cover.cover-pattern-7:before{background:linear-gradient(115deg,transparent 0 24%,rgba(255,255,255,.28) 24.5% 25.5%,transparent 26% 50%,rgba(0,0,0,.18) 50.5% 76%,transparent 76.5%);transform:scale(1.1)}
     .cover.has-original-cover{background:#111!important}
 
-  </style>
+  
+/* Dark-theme contrast fixes: keep semantic text colors aligned with dark surfaces. */
+.hero{background:linear-gradient(150deg,#191b20,#101114);color:var(--ink)}
+.hero>.cover{color:var(--ink)}
+.about-panel{color:var(--ink)}
+.label-count{background:#25282e;color:#f1efe9;border:1px solid #41454e}
+</style>
 </head>
 <body>
 <div class="app">
