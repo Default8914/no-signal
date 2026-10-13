@@ -1,5 +1,5 @@
-const CACHE = 'no-signal-v36';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './tracklists.js?v=7', './radio.js?v=1', './radio.css?v=2', './tracklists.js?v=2', './backend-config.js?v=27', './backend.js?v=27'];
+const CACHE = 'no-signal-v37';
+const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './tracklists.js?v=7', './radio.js?v=1', './radio.css?v=3', './tracklists.js?v=2', './backend-config.js?v=27', './backend.js?v=27'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
