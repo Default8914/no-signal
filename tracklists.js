@@ -9,5 +9,6 @@ window.NO_SIGNAL_TRACKLISTS = Object.freeze({
   "route-31": ["Free","Thought Process","Red Dog","Dirty South","Cell Therapy","Sesame Street","Guess Who","Serenity Prayer","Fighting","Blood","Live at the O.M.N.I.","Goodie Bag","Soul Food","Funeral","I Didn't Ask to Come","Rico","The Coming","Cee-Lo","The Day After"],
   "route-32": ["Intro","If I Die 2Nite","Me Against the World","So Many Tears","Temptations","Young Niggaz","Heavy in the Game","Lord Knows","Dear Mama","It Ain't Easy","Can U Get Away","Old School","Fuck the World","Death Around the Corner","Outlaw"],
   "route-33": ["Da Beginning","Break da Law '95","Da Summa","Live by Yo Rep (Bone Dis)","In da Game","Now I'm Hi, Pt. 3","Long Nite","Sweet Robbery, Pt. 2","Back Against da Wall","Fuckin' wit Dis Click","All or Nothin","Gotta Touch 'Em, Pt. 2","Tear da Club Up","Big Bizness (Screwed & Chopped)","Mystic Stylez"],
-  "route-34": ["Intro","One Day","Murder","Pinky Ring","Diamonds & Wood","3 in the Mornin'","Touched","Fuck My Car","That's Why I Carry","Hi-Life","Good Stuff","Ridin' Dirty","Outro"]
+  "route-34": ["Intro","One Day","Murder","Pinky Ring","Diamonds & Wood","3 in the Mornin'","Touched","Fuck My Car","That's Why I Carry","Hi-Life","Good Stuff","Ridin' Dirty","Outro"],
+  "route-35": ["You May Die (Intro)","Two Dope Boyz (In a Cadillac)","ATLiens","Wheelz of Steel","Jazzy Belle","Elevators (Me & You)","Ova da Wudz","Babylon","Wailin'","Mainstream","Decatur Psalm","Millennium","E.T. (Extraterrestrial)","13th Floor / Growing Old"]
 });
