@@ -52,8 +52,8 @@
   <button class="nav-btn" data-page="about"><span class="nav-icon">＋</span><span>О ЖУРНАЛЕ</span></button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
-<script src="./backend-config.js?v=20"></script>
-<script src="./backend.js?v=20"></script>
+<script src="./backend-config.js?v=21"></script>
+<script src="./backend.js?v=21"></script>
 <script>
 const albums = {
   paidinfull:{
@@ -285,7 +285,7 @@ async function publishDailyIssue(event){event.preventDefault();const form=event.
 function localDateKey(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
 async function loadCloudDailyIssue(){if(!window.NoSignalBackend?.configured)return;try{const issue=await window.NoSignalBackend.getTodayIssue();if(issue&&albums[issue.album_id]){state.cloudIssue=issue;if(state.page==='today')render()}}catch(e){console.info('NO SIGNAL: daily cloud issue unavailable',e.message)}}
 async function handleCloudAuth(event){event.preventDefault();const form=event.currentTarget,mode=event.submitter?.dataset.authMode||'signin',email=document.getElementById('cloud-email').value.trim(),password=document.getElementById('cloud-password').value;if(!window.NoSignalBackend?.configured){cloudStatus('Сначала настрой Supabase в backend-config.js.');return}const buttons=[...form.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);cloudStatus(mode==='signup'?'Создаём аккаунт…':'Входим…');try{if(mode==='signup'){const result=await window.NoSignalBackend.signUp(email,password);cloudStatus(result.session?'Аккаунт создан. Ты вошёл.':'Проверь почту и подтверди регистрацию, затем войди.')}else{await window.NoSignalBackend.signIn(email,password);cloudStatus('Вход выполнен.')}await refreshCloudUI()}catch(e){cloudStatus('Не получилось: '+(e.message||'проверь почту и пароль'))}finally{buttons.forEach(b=>b.disabled=false)}}
-async function syncCloudLibrary(){if(!window.NoSignalBackend?.configured){cloudStatus('Облачное подключение не настроено.');return}const button=document.querySelector('[data-cloud-sync]');if(button)button.disabled=true;cloudStatus('Синхронизируем личную полку…');try{const merged=await window.NoSignalBackend.syncLibrary(getStore());if(putStore(merged)){render();cloudStatus('Синхронизация завершена. Полка сохранена в аккаунте.')}}catch(e){cloudStatus('Синхронизация не удалась: '+(e.message||'попробуй ещё раз'))}finally{if(button)button.disabled=false}}
+async function syncCloudLibrary(){const status=document.getElementById('cloud-status'),button=document.querySelector('[data-cloud-sync]');const show=message=>{if(status)status.textContent=message};if(!window.NoSignalBackend?.configured){show('Облачное подключение не настроено: проверь конфигурацию.');return}if(button)button.disabled=true;show('Проверяем сессию и подключение к облаку…');try{const state=await window.NoSignalBackend.session();if(!state.user)throw new Error('Сессия не найдена. Войди в аккаунт заново.');show('Аккаунт подтверждён. Синхронизируем альбомы и реакции…');const merged=await window.NoSignalBackend.syncLibrary(getStore());const saved=putStore(merged);show(saved?'Синхронизация завершена. Полка сохранена в облаке и на этом устройстве.':'Облако синхронизировано, но локально не удалось сохранить изменения. Проверь свободное место и настройки браузера.')}catch(e){show('Синхронизация не удалась: '+(e?.message||String(e)||'неизвестная ошибка'))}finally{if(button)button.disabled=false}}
 async function signOutCloud(){try{await window.NoSignalBackend.signOut();await refreshCloudUI();cloudStatus('Ты вышел. Локальная полка осталась на устройстве.')}catch(e){cloudStatus('Не удалось выйти: '+(e.message||'ошибка'))}}
 function exportPersonalData(){const payload={app:'NO SIGNAL',schemaVersion:2,exportedAt:new Date().toISOString(),data:getStore()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='no-signal-library.json';document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);toast('Резервная копия подготовлена')}
 function importPersonalData(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const parsed=JSON.parse(String(reader.result||'')),candidate=parsed&&parsed.data?parsed.data:parsed;if(!candidate||typeof candidate!=='object')throw Error('invalid');if(!Array.isArray(candidate.saved)&&(!candidate.reactions||typeof candidate.reactions!=='object'))throw Error('invalid');if(!putStore(normalizeStore(candidate)))return;render();toast('Личная полка восстановлена')}catch(e){toast('Не удалось прочитать JSON NO SIGNAL')}};reader.onerror=()=>toast('Не удалось прочитать файл');reader.readAsText(file)}
@@ -646,7 +646,7 @@ restoreLocation();
 render();
 loadOriginalCovers();
 loadCloudDailyIssue();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=20',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=21',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
