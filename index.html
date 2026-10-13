@@ -442,7 +442,8 @@ function loadOriginalCovers(){
     if(res.ok){const data=await res.json();source=data.originalimage?.source||data.thumbnail?.source||null}
    }catch(e){}
   }
-  if(source&&source.startsWith('https://')){
+  if(source&&/^https?:\/\//i.test(source)){
+   source=source.replace(/^http:\/\//i,'https://');
    cache[id]=source;try{localStorage.setItem(coverCacheKey,JSON.stringify(cache))}catch(e){}
    apply(id,source);
   }else{
