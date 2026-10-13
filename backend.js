@@ -32,8 +32,8 @@
     if(rows.length){const {error:upsertError}=await c.from("user_library").upsert(rows,{onConflict:"user_id,album_id"});if(upsertError)throw upsertError}
     return merged;
   }
-  async function getTodayIssue(date=new Date().toLocaleDateString("en-CA")){
-    const c=await client();const {data,error}=await c.from("daily_issues").select("issue_date,album_id,headline,editor_note,albums(id,artist,title,release_year,genre,cover_url,spotify_url,description)").eq("issue_date",date).eq("published",true).maybeSingle();if(error)throw error;return data;
-  }
-  window.NoSignalBackend={configured,session,signIn,signUp,signOut,syncLibrary,getTodayIssue};
+  async function getProfile(){const state=await session();if(!state.user)return null;const {data,error}=await state.client.from("profiles").select("id,email,role").eq("id",state.user.id).maybeSingle();if(error)throw error;return data}
+  async function getTodayIssue(date){const c=await client();const now=new Date();const localDate=date||[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");const {data,error}=await c.from("daily_issues").select("issue_date,album_id,headline,editor_note,albums(id,artist,title,release_year,genre,cover_url,spotify_url,description)").eq("issue_date",localDate).eq("published",true).maybeSingle();if(error)throw error;return data}
+  async function publishDailyIssue(issueDate,albumId,headline,editorNote){const c=await client();const {data,error}=await c.from("daily_issues").upsert({issue_date:issueDate,album_id:albumId,headline:headline||null,editor_note:editorNote||null,published:true,updated_at:new Date().toISOString()},{onConflict:"issue_date"}).select().single();if(error)throw error;return data}
+  window.NoSignalBackend={configured,session,signIn,signUp,signOut,syncLibrary,getTodayIssue,getProfile,publishDailyIssue};
 })();
