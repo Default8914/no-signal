@@ -12,3 +12,32 @@ window.NO_SIGNAL_TRACKLISTS = Object.freeze({
   "route-34": ["Intro","One Day","Murder","Pinky Ring","Diamonds & Wood","3 in the Mornin'","Touched","Fuck My Car","That's Why I Carry","Hi-Life","Good Stuff","Ridin' Dirty","Outro"],
   "route-35": ["You May Die (Intro)","Two Dope Boyz (In a Cadillac)","ATLiens","Wheelz of Steel","Jazzy Belle","Elevators (Me & You)","Ova da Wudz","Babylon","Wailin'","Mainstream","Decatur Psalm","Millennium","E.T. (Extraterrestrial)","13th Floor / Growing Old"]
 });
+
+// Remaining route records used for precise MusicBrainz edition matching.
+window.NO_SIGNAL_ROUTE_LOOKUP = Object.freeze({
+  "route-36": { artist: "2Pac", title: "All Eyez on Me", year: 1996 },
+  "route-37": { artist: "Outkast", title: "Aquemini", year: 1998 },
+  "route-38": { artist: "Outkast", title: "Stankonia", year: 2000 },
+  "route-39": { artist: "Company Flow", title: "Funcrusher Plus", year: 1997 },
+  "route-40": { artist: "Black Star", title: "Mos Def & Talib Kweli Are Black Star", year: 1998 },
+  "route-41": { artist: "Mos Def", title: "Black on Both Sides", year: 1999 },
+  "route-42": { artist: "The Roots", title: "Things Fall Apart", year: 1999 },
+  "route-43": { artist: "MF DOOM", title: "Operation: Doomsday", year: 1999 },
+  "route-44": { artist: "Slum Village", title: "Fantastic, Vol. 2", year: 2000 },
+  "route-45": { artist: "Quasimoto", title: "The Unseen", year: 2000 },
+  "route-46": { artist: "Deltron 3030", title: "Deltron 3030", year: 2000 },
+  "route-47": { artist: "Cannibal Ox", title: "The Cold Vein", year: 2001 },
+  "route-48": { artist: "MF DOOM & Madlib", title: "Madvillainy", year: 2004 },
+  "route-49": { artist: "MF DOOM", title: "MM..FOOD", year: 2004 },
+  "route-50": { artist: "Little Brother", title: "The Minstrel Show", year: 2005 },
+  "route-51": { artist: "Clipse", title: "Hell Hath No Fury", year: 2006 },
+  "route-52": { artist: "J Dilla", title: "Donuts", year: 2006 },
+  "route-53": { artist: "Roc Marciano", title: "Reloaded", year: 2012 },
+  "route-54": { artist: "Kendrick Lamar", title: "good kid, m.A.A.d city", year: 2012 },
+  "route-55": { artist: "Freddie Gibbs & Madlib", title: "Piñata", year: 2014 },
+  "route-56": { artist: "Kendrick Lamar", title: "To Pimp a Butterfly", year: 2015 },
+  "route-57": { artist: "Danny Brown", title: "Atrocity Exhibition", year: 2016 },
+  "route-58": { artist: "Ka", title: "Honor Killed the Samurai", year: 2016 },
+  "route-59": { artist: "Earl Sweatshirt", title: "Some Rap Songs", year: 2018 },
+  "route-60": { artist: "billy woods & Kenny Segal", title: "Hiding Places", year: 2019 }
+});
