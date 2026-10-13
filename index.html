@@ -52,8 +52,8 @@
   <button class="nav-btn" data-page="about"><span class="nav-icon">＋</span><span>О ЖУРНАЛЕ</span></button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
-<script src="./backend-config.js"></script>
-<script src="./backend.js"></script>
+<script src="./backend-config.js?v=19"></script>
+<script src="./backend.js?v=19"></script>
 <script>
 const albums = {
   paidinfull:{
@@ -646,7 +646,7 @@ restoreLocation();
 render();
 loadOriginalCovers();
 loadCloudDailyIssue();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=19',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
