@@ -276,7 +276,7 @@ ORDER.splice(0,ORDER.length,...routeIds,'blackup','dalek','cannibal');
 
 const state={page:'today',album:null,filter:'all',stage:'all',sort:'route',query:'',openTrack:null,returnPage:'today',cloudIssue:null};
 const STORE='nosignal-pwa-v2';
-function normalizeStore(raw){const v=raw&&typeof raw==='object'?raw:{};const list=x=>Array.isArray(x)?[...new Set(x.filter(y=>typeof y==='string'))]:[];const reactions={};if(v.reactions&&typeof v.reactions==='object')for(const [id,r] of Object.entries(v.reactions))if(['hooked','miss','later'].includes(r))reactions[id]=r;return {version:2,saved:list(v.saved),read:list(v.read),reactions,lastOpened:typeof v.lastOpened==='string'?v.lastOpened:null}}
+function normalizeStore(raw){const v=raw&&typeof raw==='object'?raw:{};const list=x=>Array.isArray(x)?[...new Set(x.filter(y=>typeof y==='string'))]:[];const reactions={};if(v.reactions&&typeof v.reactions==='object')for(const [id,r] of Object.entries(v.reactions))if(['hooked','miss','later'].includes(r))reactions[id]=r;return {version:2,saved:list(v.saved),read:list(v.read),reactions,lastOpened:typeof v.lastOpened==='string'?v.lastOpened:null,cloudSynced:v.cloudSynced===true}}
 function getStore(){try{const raw=localStorage.getItem(STORE);if(raw)return normalizeStore(JSON.parse(raw));const legacy=localStorage.getItem('nosignal-pwa-v1');if(legacy){const value=normalizeStore(JSON.parse(legacy));putStore(value);return value}}catch(e){}return normalizeStore(null)}
 function putStore(value){try{localStorage.setItem(STORE,JSON.stringify(normalizeStore(value)));return true}catch(e){toast('Не удалось сохранить: хранилище браузера недоступно');return false}}
 function cloudStatus(message){const el=document.getElementById('cloud-status');if(el)el.textContent=message}
