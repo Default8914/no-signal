@@ -25,10 +25,11 @@
     const c=state.client;
     const {data:remote,error}=await c.from("user_library").select("album_id,saved,reaction,opened_at").eq("user_id",state.user.id);
     if(error)throw error;
-    const merged={...local,saved:[...new Set([...(local.saved||[]),...(remote||[]).filter(x=>x.saved).map(x=>x.album_id)])],reactions:{...(local.reactions||{})},read:[...new Set([...(local.read||[]),...(remote||[]).filter(x=>x.opened_at).map(x=>x.album_id)])]};
-    for(const row of remote||[])if(row.reaction&&!merged.reactions[row.album_id])merged.reactions[row.album_id]=row.reaction;
-    const ids=new Set([...(merged.saved||[]),...(merged.read||[]),...Object.keys(merged.reactions||{})]);
-    const rows=[...ids].map(id=>({user_id:state.user.id,album_id:id,saved:(merged.saved||[]).includes(id),reaction:merged.reactions?.[id]||null,opened_at:(merged.read||[]).includes(id)?new Date().toISOString():null,updated_at:new Date().toISOString()}));
+    const firstSync=!local.cloudSynced;
+    const merged={...local,saved:firstSync?[...new Set([...(local.saved||[]),...(remote||[]).filter(x=>x.saved).map(x=>x.album_id)])]:(local.saved||[]),reactions:{...(local.reactions||{})},read:firstSync?[...new Set([...(local.read||[]),...(remote||[]).filter(x=>x.opened_at).map(x=>x.album_id)])]:(local.read||[]),cloudSynced:true};
+    if(firstSync)for(const row of remote||[])if(row.reaction&&!merged.reactions[row.album_id])merged.reactions[row.album_id]=row.reaction;
+    const ids=new Set([...(merged.saved||[]),...(merged.read||[]),...Object.keys(merged.reactions||{}),...(remote||[]).map(x=>x.album_id)]);
+    const rows=[...ids].map(id=>({user_id:state.user.id,album_id:id,saved:(merged.saved||[]).includes(id),reaction:merged.reactions?.[id]||null,opened_at:(merged.read||[]).includes(id)?(remote||[]).find(x=>x.album_id===id)?.opened_at||new Date().toISOString():null,updated_at:new Date().toISOString()}));
     if(rows.length){const {error:upsertError}=await c.from("user_library").upsert(rows,{onConflict:"user_id,album_id"});if(upsertError)throw upsertError}
     return merged;
   }
