@@ -52,8 +52,8 @@
   <button class="nav-btn" data-page="about"><span class="nav-icon">＋</span><span>О ЖУРНАЛЕ</span></button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
-<script src="./backend-config.js?v=22"></script>
-<script src="./backend.js?v=22"></script>
+<script src="./backend-config.js?v=23"></script>
+<script src="./backend.js?v=23"></script>
 <script>
 const albums = {
   paidinfull:{
@@ -340,7 +340,7 @@ function importPersonalData(file){if(!file)return;const reader=new FileReader();
 window.addEventListener('storage',e=>{if(e.key===STORE)render()});
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function cover(a,mini=false){return `<div class="cover ${a.cover}${mini?' mini':''}" data-cover-id="${esc(a.id)}"><div class="cover-top"><span>NO SIGNAL / ${a.issue}</span><span>${a.year}</span></div><div class="cover-album"><div class="cover-artist">${esc(a.artist)}</div><div class="cover-title">${esc(a.title)}</div><div class="cover-caption">FIELD NOTES · ${esc(a.genre.toUpperCase())}</div></div></div>`}
-const coverCacheKey='no-signal-original-covers-v4';
+const coverCacheKey='no-signal-original-covers-v5';
 const originalCoverPages={
  'paidinfull':'Paid in Full (album)','route-02':'Criminal Minded',
  'route-03':'It Takes a Nation of Millions to Hold Us Back','route-04':'3 Feet High and Rising',
@@ -348,51 +348,111 @@ const originalCoverPages={
  'route-07':'The Low End Theory','route-08':'Step in the Arena',
  'route-09':"We Can't Be Stopped",'route-10':'Mecca and the Soul Brother'
 };
+// A small alias dictionary handles credited-name variants without weakening title matching.
+const coverArtistAliases={
+ 'paidinfull':['eric b rakim','eric b and rakim'],
+ 'route-02':['boogie down productions','bdp'],
+ 'route-04':['de la soul'],
+ 'route-06':['a tribe called quest'],
+ 'route-07':['a tribe called quest'],
+ 'route-08':['gang starr'],
+ 'route-09':['geto boys','geto boys'],
+ 'route-10':['pete rock and cl smooth','pete rock cl smooth']
+};
 const coverRequests=new Set();
 function loadOriginalCovers(){
  let cache={};try{cache=JSON.parse(localStorage.getItem(coverCacheKey)||'{}')}catch(e){}
- const apply=(id,url)=>{const a=albums[id];document.querySelectorAll('[data-cover-id]').forEach(el=>{if(el.dataset.coverId!==id)return;const old=el.querySelector('img.original-art');if(old&&old.src===url)return;const img=document.createElement('img');img.className='original-art';img.src=url;img.alt=a?'Original album cover: '+a.artist+' — '+a.title:'Original album cover';img.loading='lazy';img.decoding='async';img.onerror=()=>{el.classList.remove('has-original-cover');img.remove()};el.replaceChildren(img);el.style.backgroundImage='none';el.classList.add('has-original-cover')})};
+ const apply=(id,url)=>{
+  const a=albums[id];if(!a||!url||!/^https:\/\//i.test(url))return;
+  document.querySelectorAll('[data-cover-id]').forEach(el=>{
+   if(el.dataset.coverId!==id)return;
+   const old=el.querySelector('img.original-art');if(old&&old.src===url)return;
+   const img=document.createElement('img');img.className='original-art';img.src=url;
+   img.alt='Original album cover: '+a.artist+' — '+a.title;img.loading='lazy';img.decoding='async';
+   img.onerror=()=>{el.classList.remove('has-original-cover');img.remove();delete cache[id];try{localStorage.setItem(coverCacheKey,JSON.stringify(cache))}catch(e){}};
+   el.replaceChildren(img);el.style.backgroundImage='none';el.classList.add('has-original-cover');
+  });
+ };
  for(const [id,url] of Object.entries(cache)){if(typeof url==='string'&&url.startsWith('https://'))apply(id,url)}
- const norm=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9а-я]/g,'');
+ const norm=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9а-я]/g,'');
+ const tokens=v=>new Set(norm(v).split(/and|the|feat|featuring|with|present|presents/g).join(' ').split(/\s+/).filter(x=>x.length>1));
+ const overlap=(a,b)=>{const A=tokens(a),B=tokens(b);if(!A.size||!B.size)return 0;let n=0;for(const x of A)if(B.has(x))n++;return n/Math.max(1,Math.min(A.size,B.size))};
+ const titleScore=(wanted,got)=>{
+  const a=norm(wanted),b=norm(got);if(!a||!b)return 0;if(a===b)return 1;
+  if(b.startsWith(a)||a.startsWith(b))return .9;
+  const o=overlap(wanted,got);return o>=.8?.78:o>=.6?.62:o;
+ };
+ const artistScore=(id,wanted,got)=>{
+  const a=norm(wanted),b=norm(got);if(!a||!b)return 0;if(a===b)return 1;
+  const aliases=(coverArtistAliases[id]||[]).map(norm);if(aliases.includes(b)||aliases.includes(a))return .95;
+  const o=overlap(wanted,got);return o;
+ };
+ async function appleCover(id,a){
+  const terms=[a.artist+' '+a.title,a.title+' '+a.artist,a.title];
+  let all=[];
+  for(const term of terms){
+   try{
+    const res=await fetch('https://itunes.apple.com/search?term='+encodeURIComponent(term)+'&entity=album&limit=50');
+    if(!res.ok)continue;
+    const data=await res.json();all.push(...(data.results||[]));
+   }catch(e){}
+   if(all.length>=15)break;
+  }
+  const seen=new Set();
+  const ranked=all.filter(x=>x.artworkUrl100&&!seen.has(x.collectionId)&&(seen.add(x.collectionId),true)).map(x=>{
+   const ts=titleScore(a.title,x.collectionName),as=artistScore(id,a.artist,x.artistName);
+   return {...x,ts,as,score:ts*0.72+as*0.28};
+  }).filter(x=>x.ts>=.88&&x.as>=.45).sort((x,y)=>y.score-x.score);
+  if(!ranked.length)return null;
+  const best=ranked[0];
+  // If the top candidates have essentially equal scores but different artists/titles, avoid guessing.
+  if(ranked[1]&&Math.abs(best.score-ranked[1].score)<.015&&norm(best.collectionName)!==norm(ranked[1].collectionName))return null;
+  return best.artworkUrl100.replace(/\d+x\d+bb/,'1200x1200bb').replace(/\d+x\d+bb/,'1200x1200bb');
+ }
+ async function musicBrainzCover(a){
+  try{
+   const query='release:"'+a.title.replace(/["\\]/g,'')+'" AND artist:"'+a.artist.replace(/["\\]/g,'')+'"';
+   const res=await fetch('https://musicbrainz.org/ws/2/release-group/?query='+encodeURIComponent(query)+'&fmt=json&limit=10',{headers:{'Accept':'application/json'}});
+   if(!res.ok)return null;
+   const data=await res.json();
+   const groups=(data['release-groups']||[]).map(g=>{
+    const artist=(g['artist-credit']||[]).map(x=>typeof x==='string'?x:(x.name||x.artist?.name||'')).join(' ');
+    return {...g,ts:titleScore(a.title,g.title),as:artistScore(a.id,a.artist,artist),artistText:artist};
+   }).filter(g=>g.ts>=.88&&g.as>=.45).sort((x,y)=>(y.ts*.72+y.as*.28)-(x.ts*.72+x.as*.28));
+   if(!groups.length)return null;
+   const best=groups[0];
+   if(groups[1]&&Math.abs((best.ts*.72+best.as*.28)-(groups[1].ts*.72+groups[1].as*.28))<.015&&norm(best.title)!==norm(groups[1].title))return null;
+   const url='https://coverartarchive.org/release-group/'+best.id+'/front-1200';
+   const check=await fetch('https://coverartarchive.org/release-group/'+best.id,{headers:{'Accept':'application/json'}});
+   if(!check.ok)return null;
+   const art=await check.json();
+   const front=(art.images||[]).find(x=>x.front&&x.thumbnails);
+   return front?.thumbnails?.['1200']||front?.image||url;
+  }catch(e){return null}
+ }
  async function findCover(id){
   if(coverRequests.has(id)||cache[id])return;
   const a=albums[id];if(!a)return;coverRequests.add(id);
-  // Ask Apple for the exact release and request the largest artwork rendition.
-  try{
-   const response=await fetch('https://itunes.apple.com/search?term='+encodeURIComponent(a.artist+' '+a.title)+'&entity=album&limit=50');
-   if(response.ok){
-    const data=await response.json(),artist=norm(a.artist),title=norm(a.title);
-    const candidates=(data.results||[]).map(x=>{
-     const ca=norm(x.artistName),ct=norm(x.collectionName);
-     const artistScore=ca===artist?10:0;
-     const titleScore=ct===title?12:0;
-     return {...x,score:artistScore+titleScore};
-    }).filter(x=>x.score>=22&&x.artworkUrl100).sort((x,y)=>y.score-x.score);
-    if(candidates.length){
-     const hit=candidates[0];
-     const source=hit.artworkUrl100.replace(/\d+x\d+bb/,'1000x1000bb');
-     cache[id]=source;try{localStorage.setItem(coverCacheKey,JSON.stringify(cache))}catch(e){}
-     apply(id,source);return;
-    }
-   }
-  }catch(e){}
-  // Wikipedia is only a fallback. Prefer its full original image over thumbnails.
-  const page=originalCoverPages[id];
-  if(page)try{
-   const response=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(page),{headers:{'Accept':'application/json'}});
-   if(response.ok){
-    const data=await response.json();
-    const source=data.originalimage&&data.originalimage.source;
-    if(source&&source.startsWith('https://upload.wikimedia.org/')){
-     cache[id]=source;try{localStorage.setItem(coverCacheKey,JSON.stringify(cache))}catch(e){}
-     apply(id,source);
-    }
-   }
-  }catch(e){}
+  let source=await appleCover(id,a);
+  if(!source)source=await musicBrainzCover(a);
+  if(!source){
+   const page=originalCoverPages[id];
+   if(page)try{
+    const res=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(page),{headers:{'Accept':'application/json'}});
+    if(res.ok){const data=await res.json();source=data.originalimage?.source||data.thumbnail?.source||null}
+   }catch(e){}
+  }
+  if(source&&source.startsWith('https://')){
+   cache[id]=source;try{localStorage.setItem(coverCacheKey,JSON.stringify(cache))}catch(e){}
+   apply(id,source);
+  }else{
+   const aEl=document.querySelector('[data-cover-id="'+id+'"]');
+   if(aEl)aEl.dataset.coverStatus='needs-review';
+  }
  }
- Object.keys(originalCoverPages).forEach(id=>findCover(id));
+ // Start with visible artwork first; archive views expose the whole catalogue and resolve the remaining covers.
  const visibleIds=[...new Set([...document.querySelectorAll('[data-cover-id]')].map(el=>el.dataset.coverId))];
- visibleIds.filter(id=>!originalCoverPages[id]).forEach(id=>findCover(id));
+ visibleIds.forEach(id=>findCover(id));
 }
 function setNav(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));document.getElementById('header-issue').textContent=state.page==='article'?'READING ROOM':`Issue 001 / ${state.page==='archive'?'Archive':state.page==='saved'?'My collection':state.page==='about'?'Manifesto':'Deep Cuts'}`}
 function routeHash(page,id){return page==='article'&&id?'#album/'+encodeURIComponent(id):'#'+page}
@@ -694,7 +754,7 @@ restoreLocation();
 render();
 loadOriginalCovers();
 loadCloudDailyIssue();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=22',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=23',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
