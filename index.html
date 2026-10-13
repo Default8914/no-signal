@@ -141,7 +141,7 @@ body{background:var(--paper);color:var(--ink);background-image:radial-gradient(e
 <div class="toast" id="toast" role="status"></div>
 <script src="./backend-config.js?v=25"></script>
 <script src="./backend.js?v=24"></script>
-<script src="./tracklists.js?v=5"></script>
+<script src="./tracklists.js?v=6"></script>
 <script>
 const albums = {
   paidinfull:{
@@ -995,7 +995,7 @@ render();
 loadOriginalCovers();
 loadCloudDailyIssue();
 hydrateMissingRouteTracks();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=32',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=33',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
