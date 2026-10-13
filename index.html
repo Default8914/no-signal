@@ -454,8 +454,9 @@ function loadOriginalCovers(){
   }
  }
  // Start with visible artwork first; archive views expose the whole catalogue and resolve the remaining covers.
- const visibleIds=[...new Set([...document.querySelectorAll('[data-cover-id]')].map(el=>el.dataset.coverId))];
- visibleIds.forEach(id=>findCover(id));
+ const visibleIds=Object.keys(albums);
+ // Resolve the full catalogue in sequence, not just the currently visible cards.
+ (async()=>{for(const id of visibleIds){if(!cache[id])await findCover(id);}})();
 }
 function setNav(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));document.getElementById('header-issue').textContent=state.page==='article'?'READING ROOM':`Issue 001 / ${state.page==='archive'?'Archive':state.page==='saved'?'My collection':state.page==='about'?'Manifesto':'Deep Cuts'}`}
 function routeHash(page,id){return page==='article'&&id?'#album/'+encodeURIComponent(id):'#'+page}
