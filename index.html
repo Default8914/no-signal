@@ -753,15 +753,18 @@ applyEditorialCatalog(editorialCatalogA);
 /* Fill incomplete route entries from a matched MusicBrainz release when online.
    Never replace a populated tracklist; require both release title and artist to match. */
 async function hydrateMissingRouteTracks(){
+  let staticTracksAdded=false;
   if(window.NO_SIGNAL_TRACKLISTS){
     for(const [id,titles] of Object.entries(window.NO_SIGNAL_TRACKLISTS)){
       const a=albums[id];
       if(a&&(!a.tracks||!a.tracks.length)&&Array.isArray(titles)&&titles.length){
         a.tracks=titles.map(title=>[title,'','Редакционная заметка к этому треку ещё готовится.']);
         a.editionNote='Названия загружены из подготовленного списка; порядок и состав издания требуют финальной сверки.';
+        staticTracksAdded=true;
       }
     }
   }
+  if(staticTracksAdded)render();
   const normMusic=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
   const scoreMusic=(wanted,actual)=>{
     const w=normMusic(wanted),a=normMusic(actual);
