@@ -32,7 +32,10 @@ window.NO_SIGNAL_TRACKLISTS = Object.freeze({
   "route-54": ["Sherane a.k.a Master Splinter's Daughter","Bitch, Don't Kill My Vibe","Backseat Freestyle","The Art of Peer Pressure","Money Trees","Poetic Justice","good kid","m.A.A.d city","Swimming Pools (Drank)","Sing About Me, I'm Dying of Thirst","Real","Compton"],
   "route-55": ["Supplier","Scarface","Deeper","High","Harold's","Bomb","Shitsville","Thuggin'","Lakers","Robes","Broken","Knicks","Shame","Watts","Uno","Piñata","Thuggin' (Remix)"],
   "route-56": ["Wesley's Theory","For Free?","King Kunta","Institutionalized","These Walls","u","Alright","For Sale?","Momma","Hood Politics","How Much a Dollar Cost","Complexion (A Zulu Love)","The Blacker the Berry","You Ain't Gotta Lie (Momma Said)","i","Mortal Man"],
-  "route-57": ["Downward Spiral","Tell Me What I Don't Know","Rolling Stone","Really Doe","Lost","Ain't It Funny","Golddust","White Lines","Pneumonia","Dance in the Water","From the Ground","When It Rain","Today","Get Hi","Hell for It"]
+  "route-57": ["Downward Spiral","Tell Me What I Don't Know","Rolling Stone","Really Doe","Lost","Ain't It Funny","Golddust","White Lines","Pneumonia","Dance in the Water","From the Ground","When It Rain","Today","Get Hi","Hell for It"],
+  "route-58": ["Conflicted","I Love (Mimi, Moms, Kev)","Just","Ours","Day 9127","Mourn at Night","Sirens","I Wish (Death Poem)","That Cold and Lonely","Every Now and Then","Finer Things","$"],
+  "route-59": ["Shattered Dreams","Red Water","Cold Summers","Nowhere2go","The Mint","The Bends","Loosie","Azucar","Eclipse","Veins","Playing Possum","Peanut","Riot!","December 24","Ontheway!"],
+  "route-60": ["Spongebob","Checkpoints","Spider Hole","Houthi","A Day in a Week in a Year","Bedtime","Speak Gently","Tumbleweed","Crawlspace","Red Dust","Toothy","Bigfakelaugh"]
 });
 
 // Remaining route records used for precise MusicBrainz edition matching.
