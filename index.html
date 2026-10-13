@@ -120,7 +120,7 @@ body{background:var(--paper);color:var(--ink);background-image:radial-gradient(e
 .hero>.cover{color:var(--ink)}
 .about-panel{color:var(--ink)}
 .label-count{background:#25282e;color:#f1efe9;border:1px solid #41454e}
-  <link rel="stylesheet" href="./radio.css?v=2">
+  <link rel="stylesheet" href="./radio.css?v=3">
 </style>
 </head>
 <body>
@@ -998,7 +998,7 @@ render();
 loadOriginalCovers();
 loadCloudDailyIssue();
 hydrateMissingRouteTracks();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=36',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=37',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
