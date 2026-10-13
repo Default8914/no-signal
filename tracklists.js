@@ -309,3 +309,105 @@ window.NO_SIGNAL_TRACK_NOTES_EXTRA = Object.freeze(Object.fromEntries(
       return (prompts[index%prompts.length]||"Слушая «{title}», обрати внимание на его место в последовательности альбома и на взаимодействие голоса, ритма и музыкальной фактуры.").replaceAll("{title}",title);
     })])
 ));
+
+/* Extend individual listening prompts to the next underground classics. */
+const routeEditorialPromptsB = {
+"route-46":[
+"Deltron 3030 mixes futuristic storytelling with dense production. In “{title}”, listen for how the beat makes the sci-fi premise feel like a scene rather than a gimmick.",
+"“{title}” belongs to an album built like a concept film. Notice the transitions, voices and small sound effects that connect its world.",
+"Dan the Automator’s production and Del the Funky Homosapien’s delivery pull in different directions. In “{title}”, notice how that contrast creates movement.",
+"Listen to “{title}” for the balance between intricate rhyme patterns and the larger narrative. The track is one piece of a deliberately constructed universe."
+],
+"route-47":[
+"Cannibal Ox’s sound is cold, dense and distinctly New York. In “{title}”, listen to the space between the drums and the voices, and how it shapes the mood.",
+"“{title}” works within The Cold Vein’s urban, almost dystopian atmosphere. Notice how the production makes the city feel like part of the story.",
+"Vast Aire and Vordul Mega have contrasting vocal rhythms. In “{title}”, compare their phrasing and how each voice sits against the beat.",
+"Listen to “{title}” as a piece of the album’s larger portrait of pressure, ambition and survival. The sparse sound leaves the words exposed."
+],
+"route-48":[
+"Madvillainy thrives on compact ideas and abrupt transitions. In “{title}”, notice how the loop creates a complete mood before the track is over.",
+"MF DOOM’s phrasing often hides intricate rhymes inside a casual delivery. Listen to “{title}” again and focus on where he places unexpected stresses.",
+"Madlib’s samples make the album feel like a box of records cut into a dream. In “{title}”, listen for the texture that gives the beat its personality.",
+"“{title}” is part of a deliberately fragmented album rather than a conventional sequence of singles. Notice how its ending leads into the next musical idea."
+],
+"route-49":[
+"MM..FOOD turns food imagery into a playful frame for satire and wordplay. In “{title}”, listen for the jokes hidden inside the rhyme patterns.",
+"MF DOOM’s voice can sound relaxed while the writing stays densely packed. In “{title}”, focus on internal rhymes and the way the beat leaves room for them.",
+"“{title}” belongs to an album that treats skits and transitions as part of the concept. Notice how the track’s mood fits the wider food-themed collage.",
+"Listen to “{title}” for the contrast between cartoonish imagery and sharp observations. That tension is central to DOOM’s masked-villain persona."
+],
+"route-50":[
+"Little Brother balance humour, critique and everyday detail. In “{title}”, listen to how Phonte and Big Pooh differ in tone while sharing the same grounded perspective.",
+"“{title}” belongs to an album framed as a fictional television show. Notice the way skits, transitions and recurring voices build the setting.",
+"9th Wonder’s warm sample-based production gives “{title}” a conversational feel. Listen to the loop and how it supports rather than overwhelms the verses.",
+"Pay attention to the social observation inside “{title}”. The album often uses wit to discuss representation, ambition and the music business."
+],
+"route-51":[
+"Clipse’s writing on “{title}” is precise and economical. Listen to how Malice and Pusha T use different tones to sharpen the same cold atmosphere.",
+"“{title}” sits inside a stark, tightly controlled production style. Notice how the beat’s space makes every vocal accent feel deliberate.",
+"The Neptunes strip away clutter and leave a hard rhythmic outline. In “{title}”, focus on the relation between the bass, percussion and the twins’ delivery.",
+"Listen to “{title}” for the album’s tension between luxury, danger and emotional distance. The restrained sound makes that tension more striking."
+],
+"route-52":[
+"Donuts is built from short instrumental fragments, often turning a tiny sample into a full emotional arc. In “{title}”, follow the change in texture from beginning to end.",
+"J Dilla’s timing gives the drums a loose, human swing. In “{title}”, listen to the kick and snare rather than searching for a conventional vocal hook.",
+"“{title}” is a miniature in a larger collage. Notice how its brevity or abrupt ending changes the feeling of the tracks around it.",
+"Listen to “{title}” as an instrumental memory: the sample carries a mood before any explanation is possible. Ask what emotion the loop suggests."
+],
+"route-53":[
+"Roc Marciano’s delivery is unhurried and dry, leaving space for the details in each line. In “{title}”, notice how the understated voice creates tension.",
+"“{title}” fits Reloaded’s stripped-back, cinematic production. Listen for the bass, sparse drums and small sample details that set the scene.",
+"Roc’s writing often turns luxury and danger into deadpan snapshots. In “{title}”, focus on the image-making and the calm delivery rather than a big hook.",
+"Listen to “{title}” for the way minimal production creates a sense of space. The track’s restraint is a defining part of the album’s sound."
+],
+"route-54":[
+"good kid, m.A.A.d city unfolds like a coming-of-age film. In “{title}”, notice how the scene or voice connects to the larger narrative of one day in Compton.",
+"Listen to “{title}” for the production details that carry the story: voices, transitions, and shifts in perspective are part of the album’s structure.",
+"Kendrick moves between character voices and more reflective narration. In “{title}”, listen for the moment when the performance shifts from bravado to vulnerability.",
+"“{title}” belongs to an album where sequencing matters. Notice how its mood changes what the previous track means and prepares the next scene."
+],
+"route-55":[
+"Piñata combines Freddie Gibbs’s crisp, hard-edged delivery with Madlib’s dusty, jazz-inflected loops. In “{title}”, listen for the contrast between vocal precision and sample texture.",
+"“{title}” is a meeting point between street narrative and abstract production. Notice how the beat sets the emotional temperature before the verse begins.",
+"Freddie Gibbs often packs syllables tightly into the rhythm, while Madlib leaves unusual spaces. In “{title}”, focus on how the two approaches meet.",
+"Listen to “{title}” for the way guest voices change the track’s energy without losing the album’s hazy, sample-driven character."
+],
+"route-56":[
+"To Pimp a Butterfly moves between jazz, funk, spoken word and hip-hop. In “{title}”, listen for the live instrumentation and how it changes the rhythm of Kendrick’s delivery.",
+"“{title}” belongs to an album that treats identity and power as personal as well as political questions. Notice the tension between the music’s energy and its subject.",
+"Kendrick’s performance changes character across the album. In “{title}”, follow the shifts in voice, perspective and emotional pressure.",
+"Listen to “{title}” in sequence: recurring musical ideas and the developing poem make the album feel like one extended argument."
+],
+"route-57":[
+"Danny Brown’s delivery on Atrocity Exhibition can sound manic, vulnerable or darkly comic. In “{title}”, notice how his voice changes the feeling of the production.",
+"“{title}” sits within an album shaped by abrasive textures and uneasy grooves. Listen to the sounds that feel unstable rather than conventionally catchy.",
+"Production details on Atrocity Exhibition often push against the vocal instead of simply supporting it. In “{title}”, follow the friction between beat and voice.",
+"Listen to “{title}” for the contrast between public excess and private discomfort. The album’s intensity often hides a more fragile perspective."
+],
+"route-58":[
+"Ka’s writing is quiet, compressed and rich in historical references. In “{title}”, give the words space and listen for the weight carried by each short phrase.",
+"Honor Killed the Samurai uses sparse production and a measured vocal style. In “{title}”, notice how restraint makes the atmosphere feel heavier.",
+"“{title}” belongs to an album that reflects on honour, survival and moral compromise. Listen for the tension between the historical frame and contemporary life.",
+"Rather than building to a large chorus, “{title}” relies on small changes in rhythm and emphasis. Notice how Ka’s controlled delivery shapes the mood."
+],
+"route-59":[
+"Some Rap Songs uses fragments, abrupt cuts and compressed writing to create an inward mood. In “{title}”, notice what is left unsaid as much as what is spoken.",
+"Earl Sweatshirt’s voice often feels close and unguarded. In “{title}”, listen to how the production’s rough edges support that intimacy.",
+"“{title}” is a short piece in a fragmented album. Notice how the transition or ending makes the track feel like a thought interrupted.",
+"Listen to “{title}” for the way memory, grief and self-questioning appear in compressed images rather than a linear story."
+],
+"route-60":[
+"billy woods and Kenny Segal create a tense, claustrophobic sound world. In “{title}”, listen to how the beat leaves uncomfortable gaps instead of offering an easy groove.",
+"“{title}” belongs to an album full of uneasy images and shifting points of view. Notice how the production amplifies the uncertainty of the narration.",
+"billy woods writes through allusion and fragmented scenes. In “{title}”, focus on the images that stay with you rather than trying to force a single literal meaning.",
+"Listen to “{title}” in sequence: Hiding Places uses recurring moods and abrupt transitions to make the whole album feel like one unsettled space."
+]
+};
+window.NO_SIGNAL_TRACK_NOTES_EXTRA_B = Object.freeze(Object.fromEntries(
+  Object.entries(window.NO_SIGNAL_TRACKLISTS)
+    .filter(([id]) => /^route-(4[6-9]|5[0-9]|60)$/.test(id))
+    .map(([id,titles]) => [id,titles.map((title,index) => {
+      const prompts=routeEditorialPromptsB[id]||[];
+      return (prompts[index%prompts.length]||"Listen to “{title}” as part of the album’s wider sequence, paying attention to rhythm, voice and production.").replaceAll("{title}",title);
+    })])
+));
