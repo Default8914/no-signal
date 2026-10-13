@@ -132,3 +132,9 @@
 @media(prefers-reduced-motion:reduce){
  .radio-page,.radio-tuned,.radio-spectrum i{animation:none!important;transition:none!important}
 }
+
+/* Small alignment details for the route list and the five-item phone nav. */
+.radio-queue-label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 15px 8px;background:#191c21;color:#8c929c;font:800 8px/1.4 ui-monospace,monospace;letter-spacing:.09em}
+@media(min-width:520px){.radio-queue-label{padding:16px 22px 8px}}
+@media(min-width:700px){.radio-queue-label{padding:18px 26px 9px}}
+@media(max-width:390px){.nav-btn{font-size:8px;letter-spacing:0;padding-left:1px;padding-right:1px}.nav-btn .nav-icon{font-size:18px}.bottom-nav{padding-left:4px;padding-right:4px;column-gap:0}}
