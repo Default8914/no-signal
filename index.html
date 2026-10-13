@@ -374,16 +374,17 @@ function loadOriginalCovers(){
   });
  };
  for(const [id,url] of Object.entries(cache)){if(typeof url==='string'&&url.startsWith('https://'))apply(id,url)}
- const norm=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9а-я]/g,'');
+ const norm=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9а-я]+/g,' ').replace(/\s+/g,' ').trim();
+ const compact=v=>norm(v).replace(/\s+/g,'');
  const tokens=v=>new Set(norm(v).split(/and|the|feat|featuring|with|present|presents/g).join(' ').split(/\s+/).filter(x=>x.length>1));
  const overlap=(a,b)=>{const A=tokens(a),B=tokens(b);if(!A.size||!B.size)return 0;let n=0;for(const x of A)if(B.has(x))n++;return n/Math.max(1,Math.min(A.size,B.size))};
  const titleScore=(wanted,got)=>{
-  const a=norm(wanted),b=norm(got);if(!a||!b)return 0;if(a===b)return 1;
-  if(b.startsWith(a)||a.startsWith(b))return .9;
+  const a=norm(wanted),b=norm(got);if(!a||!b)return 0;if(a===b||compact(a)===compact(b))return 1;
+  if(b.startsWith(a)||a.startsWith(b)||compact(b).startsWith(compact(a))||compact(a).startsWith(compact(b)))return .9;
   const o=overlap(wanted,got);return o>=.8?.78:o>=.6?.62:o;
  };
  const artistScore=(id,wanted,got)=>{
-  const a=norm(wanted),b=norm(got);if(!a||!b)return 0;if(a===b)return 1;
+  const a=norm(wanted),b=norm(got);if(!a||!b)return 0;if(a===b||compact(a)===compact(b))return 1;
   const aliases=(coverArtistAliases[id]||[]).map(norm);if(aliases.includes(b)||aliases.includes(a))return .95;
   const o=overlap(wanted,got);return o;
  };
@@ -407,7 +408,7 @@ function loadOriginalCovers(){
   const best=ranked[0];
   // If the top candidates have essentially equal scores but different artists/titles, avoid guessing.
   if(ranked[1]&&Math.abs(best.score-ranked[1].score)<.015&&norm(best.collectionName)!==norm(ranked[1].collectionName))return null;
-  return best.artworkUrl100.replace(/\d+x\d+bb/,'1200x1200bb').replace(/\d+x\d+bb/,'1200x1200bb');
+  return best.artworkUrl100.replace(/\d+x\d+bb/,'1200x1200bb');
  }
  async function musicBrainzCover(a){
   try{
