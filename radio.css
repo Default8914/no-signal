@@ -138,3 +138,21 @@
 @media(min-width:520px){.radio-queue-label{padding:16px 22px 8px}}
 @media(min-width:700px){.radio-queue-label{padding:18px 26px 9px}}
 @media(max-width:390px){.nav-btn{font-size:8px;letter-spacing:0;padding-left:1px;padding-right:1px}.nav-btn .nav-icon{font-size:18px}.bottom-nav{padding-left:4px;padding-right:4px;column-gap:0}}
+
+/* RADIO emergency layout correction: neutralize oversized decorative layers. */
+.radio-page{width:100%;max-width:100%;overflow:hidden;animation:none!important;filter:none!important;transform:none!important}
+.radio-page .radio-hero:after{content:none!important;display:none!important}
+.radio-page .radio-hero:before{background:radial-gradient(ellipse at 90% 0%,rgba(183,161,255,.10),transparent 42%)!important}
+.radio-page .radio-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;gap:10px!important;width:100%}
+.radio-page .radio-station{display:flex!important;position:relative!important;width:100%!important;min-width:0!important;min-height:190px!important;height:auto!important;box-sizing:border-box!important;padding:13px!important;overflow:hidden!important;white-space:normal!important;transform:none}
+.radio-page .radio-station-title{display:block!important;white-space:normal!important;line-height:1.05!important;overflow-wrap:anywhere!important;word-break:normal!important}
+.radio-page .radio-station-desc{display:block!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.5!important}
+.radio-page .radio-station-top,.radio-page .radio-station-bottom{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;white-space:normal!important}
+.radio-page .radio-tuned{display:block!important;width:100%!important;box-sizing:border-box!important;overflow:hidden!important;animation:none!important;transform:none!important}
+.radio-page .radio-tuned-head{display:flex!important;align-items:flex-start!important;gap:12px!important}
+.radio-page .radio-queue-row{display:grid!important;grid-template-columns:24px minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important}
+.radio-page .radio-queue-title,.radio-page .radio-queue-artist{display:block!important;white-space:normal!important;overflow-wrap:anywhere!important}
+.radio-page .radio-transport{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,.9fr)!important;gap:6px!important}
+.radio-page .radio-transport .btn{min-width:0!important;max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important}
+@media(min-width:700px){.radio-page .radio-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}.radio-page .radio-station{min-height:215px!important}}
+@media(max-width:359px){.radio-page .radio-grid{gap:7px!important}.radio-page .radio-station{padding:10px!important;min-height:180px!important}.radio-page .radio-transport{grid-template-columns:1fr 1fr!important}.radio-page .radio-transport a{grid-column:1/-1}}
