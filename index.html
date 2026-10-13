@@ -54,6 +54,7 @@
 <div class="toast" id="toast" role="status"></div>
 <script src="./backend-config.js?v=23"></script>
 <script src="./backend.js?v=23"></script>
+<script src="./tracklists.js?v=1"></script>
 <script>
 const albums = {
   paidinfull:{
@@ -748,6 +749,47 @@ function applyEditorialCatalog(catalog){
 }
 applyEditorialCatalog(editorialCatalogA);
 
+/* Fill incomplete route entries from a matched MusicBrainz release when online.
+   Never replace a populated tracklist; require both release title and artist to match. */
+async function hydrateMissingRouteTracks(){
+  const normMusic=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+  const scoreMusic=(wanted,actual)=>{
+    const w=normMusic(wanted),a=normMusic(actual);
+    if(!w||!a)return 0;
+    if(w===a)return 1;
+    const wt=new Set(w.split(' ')),at=new Set(a.split(' '));
+    let n=0;for(const t of wt)if(at.has(t))n++;
+    return n/Math.max(1,wt.size);
+  };
+  for(const r of learningRoute){
+    const a=albums[r.id];
+    if(!a||a.tracks?.length)continue;
+    try{
+      const q='release:"'+a.title.replace(/["\\]/g,'')+'" AND artist:"'+a.artist.replace(/["\\]/g,'')+'"';
+      const search=await fetch('https://musicbrainz.org/ws/2/release/?query='+encodeURIComponent(q)+'&fmt=json&limit=10',{headers:{'Accept':'application/json'}});
+      if(!search.ok)continue;
+      const results=(await search.json()).releases||[];
+      const candidates=results.map(x=>({...x,ts:scoreMusic(a.title,x.title),as:scoreMusic(a.artist,(x['artist-credit']||[]).map(y=>typeof y==='string'?y:(y.name||y.artist?.name||'')).join(' '))}))
+        .filter(x=>x.ts>=.8&&x.as>=.65)
+        .sort((x,y)=>(y.ts+y.as)-(x.ts+x.as));
+      if(!candidates.length)continue;
+      const best=candidates[0];
+      if(candidates[1]&&Math.abs((best.ts+best.as)-(candidates[1].ts+candidates[1].as))<.05&&best.id!==candidates[1].id)continue;
+      const detail=await fetch('https://musicbrainz.org/ws/2/release/'+best.id+'?inc=recordings&fmt=json',{headers:{'Accept':'application/json'}});
+      if(!detail.ok)continue;
+      const release=await detail.json();
+      const trackRows=(release.media||[]).flatMap(m=>(m.tracks||[]).map(t=>t.title||t.recording?.title).filter(Boolean));
+      if(!trackRows.length)continue;
+      a.tracks=trackRows.map(title=>[title,'','Слушательская заметка будет добавлена после редакционной проверки этого трека.']);
+      a.runtime='трек-лист загружен из MusicBrainz';
+      a.trackSource='https://musicbrainz.org/release/'+best.id;
+      a.editionNote='Автоматически сопоставленный релиз MusicBrainz; проверьте, что это нужное издание.';
+      if(state.page==='article'&&state.album===r.id)render();
+    }catch(e){}
+  }
+}
+
+
 function render(){setNav();const main=document.getElementById('main');if(state.page==='today')main.innerHTML=home();else if(state.page==='archive')main.innerHTML=archive();else if(state.page==='saved')main.innerHTML=saved();else if(state.page==='about')main.innerHTML=about();else if(state.page==='article')main.innerHTML=article(state.album);attach();if(typeof loadOriginalCovers==='function')loadOriginalCovers();}
 let toastTimer;function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1800)}
 function attach(){document.querySelectorAll('[data-card-open]').forEach(card=>{card.addEventListener('click',e=>{if(e.target.closest('button,a'))return;go('article',card.dataset.cardOpen)});card.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a')){e.preventDefault();go('article',card.dataset.cardOpen)}})});document.querySelectorAll('#main [data-page]').forEach(b=>b.onclick=()=>go(b.dataset.page));document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>go('article',b.dataset.open));document.querySelectorAll('[data-save]').forEach(b=>b.onclick=()=>{const id=b.dataset.save,s=getStore();s.saved=s.saved.includes(id)?s.saved.filter(x=>x!==id):[...s.saved,id];putStore(s);render();toast(s.saved.includes(id)?'Добавлено в «Моё»':'Убрано из сохранённого')});document.querySelectorAll('[data-reaction]').forEach(b=>b.onclick=()=>{const s=getStore(),id=b.dataset.reaction,value=b.dataset.value;if(s.reactions[id]===value)delete s.reactions[id];else s.reactions[id]=value;if(value==='later'&&s.reactions[id]==='later'&&!s.saved.includes(id))s.saved.push(id);putStore(s);render();toast(({hooked:'Отмечено: зацепило',miss:'Отмечено: мимо',later:'Отложено на потом'})[s.reactions[id]]||'Отметка удалена')});document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{state.filter=b.dataset.filter;render()});document.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>{state.stage=b.dataset.stage;render()});document.querySelectorAll('[data-reset-filters]').forEach(b=>b.onclick=()=>{state.query='';state.filter='all';state.stage='all';state.sort='route';render()});const sortControl=document.getElementById('archive-sort');if(sortControl)sortControl.onchange=()=>{state.sort=sortControl.value;render()};const authForm=document.getElementById('cloud-auth-form');if(authForm)authForm.onsubmit=handleCloudAuth;const publishForm=document.getElementById('daily-publish-form');if(publishForm){publishForm.onsubmit=publishDailyIssue;const dateInput=document.getElementById('daily-date');if(dateInput&&!dateInput.value)dateInput.value=localDateKey()}const syncButton=document.querySelector('[data-cloud-sync]');if(syncButton)syncButton.onclick=syncCloudLibrary;const signoutButton=document.querySelector('[data-cloud-signout]');if(signoutButton)signoutButton.onclick=signOutCloud;refreshCloudUI();const exportButton=document.querySelector('[data-export-data]');if(exportButton)exportButton.onclick=exportPersonalData;const importButton=document.querySelector('[data-import-trigger]');if(importButton)importButton.onclick=()=>document.getElementById('import-data-file')?.click();const importInput=document.getElementById('import-data-file');if(importInput)importInput.onchange=()=>importPersonalData(importInput.files&&importInput.files[0]);document.querySelectorAll('[data-track]').forEach(b=>b.onclick=()=>{const n=Number(b.dataset.track);state.openTrack=state.openTrack===n?null:n;const id=state.album;render();if(id)document.querySelector(`[data-track="${n}"]`)?.scrollIntoView({block:'nearest',behavior:'smooth'})});const search=document.getElementById('archive-search');if(search){search.addEventListener('input',e=>{const pos=e.target.selectionStart;state.query=e.target.value;const y=window.scrollY;render();const next=document.getElementById('archive-search');next.focus();next.setSelectionRange(pos,pos);window.scrollTo(0,y)})}}
@@ -756,6 +798,7 @@ restoreLocation();
 render();
 loadOriginalCovers();
 loadCloudDailyIssue();
+hydrateMissingRouteTracks();
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=23',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{}));}
 </script>
 </body>
