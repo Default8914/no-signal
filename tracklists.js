@@ -325,94 +325,94 @@ window.NO_SIGNAL_TRACK_NOTES_EXTRA = Object.freeze(Object.fromEntries(
 /* Extend individual listening prompts to the next underground classics. */
 const routeEditorialPromptsB = {
 "route-46":[
-"Deltron 3030 mixes futuristic storytelling with dense production. In “{title}”, listen for how the beat makes the sci-fi premise feel like a scene rather than a gimmick.",
-"“{title}” belongs to an album built like a concept film. Notice the transitions, voices and small sound effects that connect its world.",
-"Dan the Automator’s production and Del the Funky Homosapien’s delivery pull in different directions. In “{title}”, notice how that contrast creates movement.",
-"Listen to “{title}” for the balance between intricate rhyme patterns and the larger narrative. The track is one piece of a deliberately constructed universe."
+"Deltron 3030 соединяют научно-фантастический сюжет с плотным продакшеном. В «{title}» обрати внимание, как бит превращает фантастическую идею в отдельную сцену.",
+"«{title}» — часть альбома, построенного как концептуальный фильм. Заметь переходы, голоса и звуковые детали, которые связывают его мир.",
+"Продакшен Dan the Automator и подача Del the Funky Homosapien создают контраст. В «{title}» послушай, как разные элементы формируют движение.",
+"Слушай «{title}» как часть общей истории Deltron 3030: важны не только рифмы, но и звуковые детали, которые поддерживают футуристический сюжет."
 ],
 "route-47":[
-"Cannibal Ox’s sound is cold, dense and distinctly New York. In “{title}”, listen to the space between the drums and the voices, and how it shapes the mood.",
-"“{title}” works within The Cold Vein’s urban, almost dystopian atmosphere. Notice how the production makes the city feel like part of the story.",
-"Vast Aire and Vordul Mega have contrasting vocal rhythms. In “{title}”, compare their phrasing and how each voice sits against the beat.",
-"Listen to “{title}” as a piece of the album’s larger portrait of pressure, ambition and survival. The sparse sound leaves the words exposed."
+"Звук Cannibal Ox холодный, плотный и узнаваемо нью-йоркский. В «{title}» прислушайся к пространству между ударными и голосами: оно формирует настроение.",
+"«{title}» поддерживает почти антиутопическую атмосферу The Cold Vein. Обрати внимание, как продакшен превращает город в часть повествования.",
+"У Vast Aire и Vordul Mega разные ритмика и интонация. В «{title}» сравни их фразировку и то, как каждый голос ложится на бит.",
+"Воспринимай «{title}» как часть портрета давления, амбиций и выживания. Разреженная музыка оставляет слова на переднем плане."
 ],
 "route-48":[
-"Madvillainy thrives on compact ideas and abrupt transitions. In “{title}”, notice how the loop creates a complete mood before the track is over.",
-"MF DOOM’s phrasing often hides intricate rhymes inside a casual delivery. Listen to “{title}” again and focus on where he places unexpected stresses.",
-"Madlib’s samples make the album feel like a box of records cut into a dream. In “{title}”, listen for the texture that gives the beat its personality.",
-"“{title}” is part of a deliberately fragmented album rather than a conventional sequence of singles. Notice how its ending leads into the next musical idea."
+"Madvillainy строится на коротких идеях и резких переходах. В «{title}» послушай, как петля успевает создать целое настроение за короткое время.",
+"MF DOOM прячет сложные рифмы в почти небрежной подаче. Переслушай «{title}» и отметь неожиданные ударения в строках.",
+"Сэмплы Madlib превращают альбом в коробку пластинок, смонтированную как сон. В «{title}» найди фактуру, которая придаёт биту характер.",
+"«{title}» — часть намеренно фрагментарного альбома, а не набора обычных синглов. Обрати внимание, как окончание подводит к следующей музыкальной идее."
 ],
 "route-49":[
-"MM..FOOD turns food imagery into a playful frame for satire and wordplay. In “{title}”, listen for the jokes hidden inside the rhyme patterns.",
-"MF DOOM’s voice can sound relaxed while the writing stays densely packed. In “{title}”, focus on internal rhymes and the way the beat leaves room for them.",
-"“{title}” belongs to an album that treats skits and transitions as part of the concept. Notice how the track’s mood fits the wider food-themed collage.",
-"Listen to “{title}” for the contrast between cartoonish imagery and sharp observations. That tension is central to DOOM’s masked-villain persona."
+"MM..FOOD использует пищевые образы как игровую рамку для сатиры и словесных игр. В «{title}» прислушайся к шуткам, спрятанным внутри рифм.",
+"Голос MF DOOM может звучать расслабленно, хотя текст остаётся плотным. В «{title}» обрати внимание на внутренние рифмы и пространство, которое оставляет для них бит.",
+"«{title}» входит в альбом, где скиты и переходы — часть концепции. Заметь, как настроение трека вписывается в общий коллаж вокруг темы еды.",
+"В «{title}» обрати внимание на контраст мультяшных образов и острых наблюдений. Это напряжение — важная часть образа DOOM в маске злодея."
 ],
 "route-50":[
-"Little Brother balance humour, critique and everyday detail. In “{title}”, listen to how Phonte and Big Pooh differ in tone while sharing the same grounded perspective.",
-"“{title}” belongs to an album framed as a fictional television show. Notice the way skits, transitions and recurring voices build the setting.",
-"9th Wonder’s warm sample-based production gives “{title}” a conversational feel. Listen to the loop and how it supports rather than overwhelms the verses.",
-"Pay attention to the social observation inside “{title}”. The album often uses wit to discuss representation, ambition and the music business."
+"Little Brother соединяют юмор, критику и бытовые детали. В «{title}» сравни интонации Phonte и Big Pooh: они различаются, но сохраняют общий взгляд.",
+"«{title}» входит в альбом, оформленный как вымышленное телешоу. Скиты, переходы и возвращающиеся голоса создают его декорации.",
+"Тёплый сэмпловый продакшен 9th Wonder придаёт «{title}» разговорную интонацию. Послушай, как петля поддерживает куплеты, не заглушая их.",
+"Обрати внимание на социальное наблюдение в «{title}». Альбом использует остроумие, чтобы говорить о репрезентации, амбициях и музыкальном бизнесе."
 ],
 "route-51":[
-"Clipse’s writing on “{title}” is precise and economical. Listen to how Malice and Pusha T use different tones to sharpen the same cold atmosphere.",
-"“{title}” sits inside a stark, tightly controlled production style. Notice how the beat’s space makes every vocal accent feel deliberate.",
-"The Neptunes strip away clutter and leave a hard rhythmic outline. In “{title}”, focus on the relation between the bass, percussion and the twins’ delivery.",
-"Listen to “{title}” for the album’s tension between luxury, danger and emotional distance. The restrained sound makes that tension more striking."
+"Текст Clipse в «{title}» точен и экономен. Послушай, как Malice и Pusha T разными интонациями усиливают общую холодную атмосферу.",
+"«{title}» встроен в аскетичный, тщательно контролируемый продакшен. Пространство бита делает каждый вокальный акцент намеренным.",
+"The Neptunes убирают лишние детали и оставляют жёсткий ритмический каркас. В «{title}» сосредоточься на связи баса, перкуссии и подачи братьев.",
+"В «{title}» прислушайся к напряжению между роскошью, опасностью и эмоциональной дистанцией. Сдержанный звук делает его заметнее."
 ],
 "route-52":[
-"Donuts is built from short instrumental fragments, often turning a tiny sample into a full emotional arc. In “{title}”, follow the change in texture from beginning to end.",
-"J Dilla’s timing gives the drums a loose, human swing. In “{title}”, listen to the kick and snare rather than searching for a conventional vocal hook.",
-"“{title}” is a miniature in a larger collage. Notice how its brevity or abrupt ending changes the feeling of the tracks around it.",
-"Listen to “{title}” as an instrumental memory: the sample carries a mood before any explanation is possible. Ask what emotion the loop suggests."
+"Donuts собран из коротких инструментальных фрагментов, превращающих небольшой сэмпл в эмоциональную дугу. В «{title}» проследи, как меняется фактура.",
+"Тайминг J Dilla придаёт ударным свободное, человеческое качание. В «{title}» следи за бочкой и рабочим барабаном, а не ищи привычный вокальный хук.",
+"«{title}» — миниатюра в большом коллаже. Заметь, как краткость или резкий финал меняют восприятие соседних композиций.",
+"Слушай «{title}» как инструментальное воспоминание: сэмпл передаёт настроение ещё до объяснений. Попробуй определить эмоцию, которую создаёт петля."
 ],
 "route-53":[
-"Roc Marciano’s delivery is unhurried and dry, leaving space for the details in each line. In “{title}”, notice how the understated voice creates tension.",
-"“{title}” fits Reloaded’s stripped-back, cinematic production. Listen for the bass, sparse drums and small sample details that set the scene.",
-"Roc’s writing often turns luxury and danger into deadpan snapshots. In “{title}”, focus on the image-making and the calm delivery rather than a big hook.",
-"Listen to “{title}” for the way minimal production creates a sense of space. The track’s restraint is a defining part of the album’s sound."
+"Roc Marciano читает неторопливо и сухо, оставляя место деталям каждой строки. В «{title}» обрати внимание, как сдержанный голос создаёт напряжение.",
+"«{title}» вписывается в минималистичный, кинематографичный продакшен Reloaded. Прислушайся к басу, редким ударным и деталям сэмплов.",
+"Roc часто превращает роскошь и опасность в сухие моментальные зарисовки. В «{title}» следи за образами и спокойной подачей, а не за большим хуком.",
+"В «{title}» обрати внимание, как минималистичный продакшен создаёт пространство. Сдержанность — одна из определяющих черт альбома."
 ],
 "route-54":[
-"good kid, m.A.A.d city unfolds like a coming-of-age film. In “{title}”, notice how the scene or voice connects to the larger narrative of one day in Compton.",
-"Listen to “{title}” for the production details that carry the story: voices, transitions, and shifts in perspective are part of the album’s structure.",
-"Kendrick moves between character voices and more reflective narration. In “{title}”, listen for the moment when the performance shifts from bravado to vulnerability.",
-"“{title}” belongs to an album where sequencing matters. Notice how its mood changes what the previous track means and prepares the next scene."
+"good kid, m.A.A.d city развивается как фильм о взрослении. В «{title}» проследи, как сцена или голос связаны с общей историей одного дня в Комптоне.",
+"В «{title}» слушай детали продакшена, которые несут сюжет: голоса, переходы и смена перспектив — часть структуры альбома.",
+"Kendrick переключается между голосами персонажей и рефлексивным рассказом. В «{title}» найди момент, когда бравада сменяется уязвимостью.",
+"«{title}» входит в альбом, где порядок композиций важен. Заметь, как его настроение меняет восприятие предыдущего трека и готовит следующую сцену."
 ],
 "route-55":[
-"Piñata combines Freddie Gibbs’s crisp, hard-edged delivery with Madlib’s dusty, jazz-inflected loops. In “{title}”, listen for the contrast between vocal precision and sample texture.",
-"“{title}” is a meeting point between street narrative and abstract production. Notice how the beat sets the emotional temperature before the verse begins.",
-"Freddie Gibbs often packs syllables tightly into the rhythm, while Madlib leaves unusual spaces. In “{title}”, focus on how the two approaches meet.",
-"Listen to “{title}” for the way guest voices change the track’s energy without losing the album’s hazy, sample-driven character."
+"Piñata соединяет чёткую, жёсткую подачу Freddie Gibbs с пыльными джазовыми петлями Madlib. В «{title}» слушай контраст точного вокала и фактуры сэмплов.",
+"«{title}» соединяет уличное повествование и абстрактный продакшен. Заметь, как бит задаёт эмоциональную температуру ещё до куплета.",
+"Freddie Gibbs плотно укладывает слоги в ритм, а Madlib оставляет необычные паузы. В «{title}» прислушайся, как эти подходы встречаются.",
+"В «{title}» обрати внимание, как гостевые голоса меняют энергию, не разрушая дымчатый, сэмпловый характер альбома."
 ],
 "route-56":[
-"To Pimp a Butterfly moves between jazz, funk, spoken word and hip-hop. In “{title}”, listen for the live instrumentation and how it changes the rhythm of Kendrick’s delivery.",
-"“{title}” belongs to an album that treats identity and power as personal as well as political questions. Notice the tension between the music’s energy and its subject.",
-"Kendrick’s performance changes character across the album. In “{title}”, follow the shifts in voice, perspective and emotional pressure.",
-"Listen to “{title}” in sequence: recurring musical ideas and the developing poem make the album feel like one extended argument."
+"To Pimp a Butterfly перемещается между джазом, фанком, spoken word и хип-хопом. В «{title}» прислушайся к живым инструментам и ритму подачи Kendrick.",
+"«{title}» входит в альбом, где идентичность и власть рассматриваются и как личные, и как политические вопросы. Отметь напряжение между энергией музыки и темой.",
+"По ходу альбома манера Kendrick меняется. В «{title}» проследи за сдвигами голоса, перспективы и эмоционального давления.",
+"Слушай «{title}» в последовательности альбома: возвращающиеся музыкальные идеи и развивающееся стихотворение превращают пластинку в единый аргумент."
 ],
 "route-57":[
-"Danny Brown’s delivery on Atrocity Exhibition can sound manic, vulnerable or darkly comic. In “{title}”, notice how his voice changes the feeling of the production.",
-"“{title}” sits within an album shaped by abrasive textures and uneasy grooves. Listen to the sounds that feel unstable rather than conventionally catchy.",
-"Production details on Atrocity Exhibition often push against the vocal instead of simply supporting it. In “{title}”, follow the friction between beat and voice.",
-"Listen to “{title}” for the contrast between public excess and private discomfort. The album’s intensity often hides a more fragile perspective."
+"На Atrocity Exhibition подача Danny Brown бывает маниакальной, уязвимой или мрачно-комичной. В «{title}» послушай, как его голос меняет ощущение продакшена.",
+"«{title}» входит в альбом с резкими фактурами и беспокойными грувами. Прислушайся к звукам, которые кажутся неустойчивыми, а не просто цепкими.",
+"На Atrocity Exhibition продакшен часто спорит с вокалом, а не просто поддерживает его. В «{title}» проследи за трением между битом и голосом.",
+"В «{title}» обрати внимание на контраст публичного излишества и внутреннего дискомфорта. За интенсивностью альбома часто скрывается уязвимая перспектива."
 ],
 "route-58":[
-"Ka’s writing is quiet, compressed and rich in historical references. In “{title}”, give the words space and listen for the weight carried by each short phrase.",
-"Honor Killed the Samurai uses sparse production and a measured vocal style. In “{title}”, notice how restraint makes the atmosphere feel heavier.",
-"“{title}” belongs to an album that reflects on honour, survival and moral compromise. Listen for the tension between the historical frame and contemporary life.",
-"Rather than building to a large chorus, “{title}” relies on small changes in rhythm and emphasis. Notice how Ka’s controlled delivery shapes the mood."
+"Тексты Ka тихие, сжатые и насыщены историческими отсылками. В «{title}» дай словам пространство и прислушайся к весу каждой короткой фразы.",
+"Honor Killed the Samurai использует разреженный продакшен и сдержанную подачу. В «{title}» заметь, как самоограничение утяжеляет атмосферу.",
+"«{title}» входит в альбом о чести, выживании и моральном компромиссе. Прислушайся к напряжению между исторической рамкой и современной жизнью.",
+"Вместо большого припева «{title}» опирается на небольшие изменения ритма и акцентов. Заметь, как сдержанная подача Ka формирует настроение."
 ],
 "route-59":[
-"Some Rap Songs uses fragments, abrupt cuts and compressed writing to create an inward mood. In “{title}”, notice what is left unsaid as much as what is spoken.",
-"Earl Sweatshirt’s voice often feels close and unguarded. In “{title}”, listen to how the production’s rough edges support that intimacy.",
-"“{title}” is a short piece in a fragmented album. Notice how the transition or ending makes the track feel like a thought interrupted.",
-"Listen to “{title}” for the way memory, grief and self-questioning appear in compressed images rather than a linear story."
+"Some Rap Songs использует фрагменты, резкие склейки и сжатые тексты для создания внутреннего настроения. В «{title}» обрати внимание и на умолчания.",
+"Голос Earl Sweatshirt часто звучит близко и без защиты. В «{title}» послушай, как шероховатости продакшена усиливают интимность.",
+"«{title}» — короткий фрагмент фрагментарного альбома. Заметь, как переход или финал создаёт ощущение оборванной мысли.",
+"В «{title}» обрати внимание, как память, горе и сомнение в себе выражены сжатыми образами, а не линейным рассказом."
 ],
 "route-60":[
-"billy woods and Kenny Segal create a tense, claustrophobic sound world. In “{title}”, listen to how the beat leaves uncomfortable gaps instead of offering an easy groove.",
-"“{title}” belongs to an album full of uneasy images and shifting points of view. Notice how the production amplifies the uncertainty of the narration.",
-"billy woods writes through allusion and fragmented scenes. In “{title}”, focus on the images that stay with you rather than trying to force a single literal meaning.",
-"Listen to “{title}” in sequence: Hiding Places uses recurring moods and abrupt transitions to make the whole album feel like one unsettled space."
+"billy woods и Kenny Segal создают напряжённый, клаустрофобный звуковой мир. В «{title}» послушай, как бит оставляет неуютные паузы вместо простого грува.",
+"«{title}» входит в альбом с тревожными образами и меняющимися точками зрения. Заметь, как продакшен усиливает неопределённость повествования.",
+"billy woods пишет через аллюзии и фрагментарные сцены. В «{title}» сосредоточься на образах, которые остаются с тобой, вместо поиска единственного буквального смысла.",
+"Слушай «{title}» в последовательности: Hiding Places использует возвращающиеся настроения и резкие переходы, превращая альбом в единое тревожное пространство."
 ]
 };
 window.NO_SIGNAL_TRACK_NOTES_EXTRA_B = Object.freeze(Object.fromEntries(
