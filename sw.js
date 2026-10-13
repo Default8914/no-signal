@@ -1,4 +1,4 @@
-const CACHE = 'no-signal-v16';
+const CACHE = 'no-signal-v17';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './backend-config.js', './backend.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
