@@ -15,30 +15,29 @@ const NO_SIGNAL_RADIO_STATIONS = [
  function stationCard(station,index,active){
   const count=getAlbums(station).length;
   return '<button class="radio-station radio-station--'+esc(station.id)+(active?' active':'')+'" data-radio-select="'+esc(station.id)+'" aria-pressed="'+active+'">'+
-   '<span class="radio-station-index">'+esc(station.tag)+' / 0'+(index+1)+'</span>'+
-   '<span class="radio-station-symbol" aria-hidden="true">'+esc(station.symbol)+'</span>'+
+   '<span class="radio-station-top"><span class="radio-station-index">0'+(index+1)+' / '+esc(station.tag.replace('TRANSMISSION ','TX '))+'</span><span class="radio-station-symbol" aria-hidden="true">'+esc(station.symbol)+'</span></span>'+
    '<span class="radio-station-title">'+esc(station.title)+'</span>'+
    '<span class="radio-station-desc">'+esc(station.desc)+'</span>'+
-   '<span class="radio-station-bottom"><span>'+count+' RECORDS</span><span class="radio-station-arrow">↗</span></span></button>';
+   '<span class="radio-station-bottom"><span>'+String(count).padStart(2,'0')+' ALBUMS</span><span>OPEN <span class="radio-station-arrow">↗</span></span></span></button>';
  }
  function render(){
   const station=getStation(),queue=getAlbums(station),idx=currentIndex(station,queue),current=queue[idx];
   const bars=Array.from({length:25},(_,i)=>'<i style="--h:'+((i*17+29)%78+17)+'%;--d:'+(0.42+(i%7)*0.13)+'s"></i>').join('');
   const queueHtml=queue.map((a,i)=>'<div class="radio-queue-row '+(i===idx?'current':'')+'"><span class="radio-queue-no">'+String(i+1).padStart(2,'0')+'</span><button class="radio-queue-open" data-radio-open="'+esc(a.id)+'" aria-label="Открыть выпуск '+esc(a.artist+' — '+a.title)+'"><span class="radio-queue-title">'+esc(a.title)+'</span><span class="radio-queue-artist">'+esc(a.artist)+' · '+esc(a.year)+'</span></button><span class="radio-queue-chip">'+(i===idx?'ON AIR':'TRACK '+String(i+1).padStart(2,'0'))+'</span></div>').join('');
   return '<div class="radio-page">'+
-   '<div class="radio-kicker"><span class="radio-pulse"></span> независимые частоты / эфир открыт</div>'+
-   '<section class="radio-hero" aria-labelledby="radio-main-title"><div class="radio-hero-top"><span>NO SIGNAL RADIO / 88.6 FM</span><span class="radio-live">● LIVE SELECTOR</span></div>'+
+   '<div class="radio-kicker"><span class="radio-pulse"></span> независимые частоты <span aria-hidden="true">/</span> эфир открыт</div>'+
+   '<section class="radio-hero" aria-labelledby="radio-main-title"><div class="radio-hero-top"><span>NO SIGNAL RADIO / 88.6 FM</span><span class="radio-live">● ON AIR</span></div>'+
    '<h1 class="radio-title" id="radio-main-title">FIND YOUR <span>FREQUENCY</span></h1>'+
-   '<p class="radio-lede">Не бесконечная лента и не алгоритм по настроению. Шесть тематических маршрутов через альбомы NO SIGNAL — с собственным ритмом, странными стыками и свободой свернуть с основной дороги.</p>'+
-   '<div class="radio-actions"><button class="btn radio-btn-acid" data-radio-shuffle>↯ ПОЙМАТЬ СЛУЧАЙНЫЙ СИГНАЛ</button><button class="btn radio-btn-outline" data-radio-copy>⎘ КОПИРОВАТЬ ТРЕКЛИСТ</button></div>'+
-   '<div style="display:flex;align-items:end;justify-content:space-between;gap:14px;margin-top:27px"><span class="radio-kicker">TUNE IN / TUNE OUT</span><span class="radio-spectrum" aria-hidden="true">'+bars+'</span></div></section>'+
-   '<div class="radio-section-head"><div><div class="eyebrow">Choose a transmission</div><h2>ШЕСТЬ ВХОДОВ<br>В ДРУГОЙ МИР</h2></div><span class="radio-count">06 CHANNELS<br>60 ALBUMS / MAIN ROUTE</span></div>'+
+   '<p class="radio-lede">Шесть авторских маршрутов через каталог NO SIGNAL. Не бесконечная лента — просто выбери частоту и иди за звуком.</p>'+
+   '<div class="radio-actions"><button class="btn radio-btn-acid" data-radio-shuffle>↯ СЛУЧАЙНЫЙ СИГНАЛ</button><button class="btn radio-btn-outline" data-radio-copy>↗ КОПИРОВАТЬ ТРЕК-ЛИСТ</button></div>'+
+   '<div class="radio-hero-bottom"><span class="radio-kicker">TUNE IN <span aria-hidden="true">/</span> TUNE OUT</span><span class="radio-spectrum" aria-hidden="true">'+bars+'</span></div></section>'+
+   '<div class="radio-section-head"><div><div class="eyebrow">Выбери передачу</div><h2>НАЙДИ СВОЮ<br>ЧАСТОТУ</h2></div><span class="radio-count">06 КАНАЛОВ<br>60 АЛЬБОМОВ В МАРШРУТЕ</span></div>'+
    '<div class="radio-grid">'+allStations().map((s,i)=>stationCard(s,i,s.id===station.id)).join('')+'</div>'+
-   '<section class="radio-tuned" aria-label="Выбранный музыкальный маршрут"><div class="radio-tuned-head"><div><div class="radio-tuned-label">СЕЙЧАС НА ЧАСТОТЕ / '+esc(station.tag)+'</div><h2>'+esc(station.title)+'</h2><p class="radio-tuned-copy">'+esc(station.note)+'</p></div><div class="radio-tuned-meta">SIGNAL<br>LOCKED<br><span style="color:#d7ff42">'+String(idx+1).padStart(2,'0')+' / '+String(queue.length).padStart(2,'0')+'</span></div></div>'+
-   (current?'<div class="radio-now"><div class="radio-now-number">'+String(idx+1).padStart(2,'0')+'</div><div><div class="radio-now-label">CURRENT RECORD / '+esc(current.year)+'</div><h3 class="radio-now-title">'+esc(current.title)+'</h3><div class="radio-now-artist">'+esc(current.artist)+'</div></div></div>'+
-   '<div class="radio-transport"><button class="btn" data-radio-prev '+(idx===0?'disabled':'')+'>← НАЗАД</button><button class="btn radio-btn-acid" data-radio-next>'+ (idx===queue.length-1?'↻ В НАЧАЛО':'СЛЕДУЮЩИЙ →')+'</button><a class="btn radio-btn-outline" href="'+esc(current.spotify)+'" target="_blank" rel="noopener noreferrer">СЛУШАТЬ ↗</a></div>':'')+
-   '<div class="radio-queue">'+queueHtml+'</div></section>'+
-   '<p class="radio-footnote">NO SIGNAL RADIO — тематические подборки из каталога журнала. Открытие альбома ведёт к редакционному выпуску; «Слушать» открывает поиск альбома в Spotify. Никакого автоплея и фонового звука.</p>'+
+   '<section class="radio-tuned" aria-label="Выбранный музыкальный маршрут"><div class="radio-tuned-head"><div class="radio-tuned-main"><div class="radio-tuned-label">СЕЙЧАС НА ЧАСТОТЕ / '+esc(station.tag)+'</div><h2>'+esc(station.title)+'</h2><p class="radio-tuned-copy">'+esc(station.note)+'</p></div><div class="radio-tuned-meta">ПОЗИЦИЯ<strong>'+String(idx+1).padStart(2,'0')+' / '+String(queue.length).padStart(2,'0')+'</strong></div></div>'+
+   (current?'<div class="radio-now"><div class="radio-now-number">'+String(idx+1).padStart(2,'0')+'</div><div><div class="radio-now-label">СЛЕДУЮЩИЙ АЛЬБОМ / '+esc(current.year)+'</div><h3 class="radio-now-title">'+esc(current.title)+'</h3><div class="radio-now-artist">'+esc(current.artist)+'</div></div></div>'+
+   '<div class="radio-transport"><button class="btn" data-radio-prev '+(idx===0?'disabled':'')+'>← НАЗАД</button><button class="btn radio-btn-acid" data-radio-next>'+ (idx===queue.length-1?'↻ С НАЧАЛА':'ДАЛЬШЕ →')+'</button><a class="btn radio-btn-outline" href="'+esc(current.spotify)+'" target="_blank" rel="noopener noreferrer">СЛУШАТЬ ↗</a></div>':'')+
+   '<div class="radio-queue-label"><span>В ЭТОМ МАРШРУТЕ</span><span>'+String(queue.length).padStart(2,'0')+' АЛЬБОМОВ</span></div><div class="radio-queue">'+queueHtml+'</div></section>'+
+   '<p class="radio-footnote">NO SIGNAL RADIO — тематические подборки из каталога журнала. Выбирай альбом, чтобы открыть выпуск; кнопка «Слушать» ведёт к поиску в Spotify. Автоплея нет.</p>'+
    '</div>';
  }
  function attach(){
